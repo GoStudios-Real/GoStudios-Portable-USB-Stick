@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoStudios Portable USB Stick</title>
+<style>
+body { font-family: 'Segoe UI', sans-serif; background: #080C28; color: #fff; margin: 0; padding: 0; }
+.hero { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, #00897B, #7E57C2); }
+.hero h1 { font-size: 3em; margin: 0; }
+.hero p { font-size: 1.3em; opacity: 0.9; }
+.logo { width: 120px; height: 120px; border-radius: 24px; margin-bottom: 20px; }
+.section { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+.section h2 { color: #80CBC4; }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.card { background: #1C2331; padding: 20px; border-radius: 12px; }
+.card h3 { color: #7E57C2; margin-top: 0; }
+.btn { display: inline-block; background: #00897B; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 5px; }
+.footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <img class="logo" src="goui/goui-logo.png" alt="GoUI Logo" onerror="this.style.display='none'">
+  <h1>GoStudios Portable USB Stick</h1>
+  <p>Your Android. Your USB. Any PC.</p>
+  <a class="btn" href="https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick">GitHub</a>
+  <a class="btn" href="https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick/releases">Download</a>
+</div>
+<div class="section">
+  <h2>About</h2>
+  <p>A non-bootable portable Android 16 USB stick that runs Android in an emulator on any Windows PC.
+  Plug it in and Android 16 (with GoUI 4.9 as the system UI) auto-opens in fullscreen; unplug and it auto-closes.</p>
+</div>
+<div class="section">
+  <h2>Features</h2>
+  <div class="features">
+    <div class="card"><h3>Android 16</h3><p>Play Store-enabled system image with Google Play Services.</p></div>
+    <div class="card"><h3>GoUI 4.9</h3><p>Custom system UI with account system, Gaming Hub, and Play Store tab.</p></div>
+    <div class="card"><h3>Auto open/close</h3><p>Watcher detects plug/unplug and launches or closes the session.</p></div>
+    <div class="card"><h3>Fullscreen</h3><p>Auto-maximizes and returns to desktop on exit.</p></div>
+    <div class="card"><h3>USB Maker</h3><p>GUI tool to create new sticks on any PC.</p></div>
+    <div class="card"><h3>Gaming Hub</h3><p>Xbox Cloud Gaming, PlayTree, GeForce NOW, Steam Link, YouTube, Discord.</p></div>
+  </div>
+</div>
+<div class="section">
+  <h2>Quick Start</h2>
+  <ol>
+    <li>Format a USB as NTFS, label it "GoStudios Portable USB Stick".</li>
+    <li>Run <code>setup.ps1</code>, then <code>create-avd.ps1</code>, then <code>build-goui.ps1</code>.</li>
+    <li>(Optional) Run <code>install-watcher.ps1</code> as Administrator for auto-open.</li>
+    <li>Plug in and run <code>launch.bat</code>.</li>
+  </ol>
+</div>
+<div class="footer">
+  &copy; 2026 GoStudios. All rights reserved. GoStudios, GoUI, GoDevice, PlayTree are trademarks of GoStudios.
+</div>
+</body>
+</html>
