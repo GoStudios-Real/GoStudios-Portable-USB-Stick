@@ -65,6 +65,9 @@ Get-ChildItem (Join-Path $USBROOT "apps\*.apk") -ErrorAction SilentlyContinue | 
     Write-Host "Installing $($_.Name)..."
     & $ADB install -r $_.FullName 2>&1 | Out-Null
 }
+# Install GoCloud Gaming
+$CG = Join-Path $USBROOT "cloudgaming\cloudgaming.apk"
+if (Test-Path $CG) { & $ADB install -r $CG 2>&1 | Out-Null; Write-Host "[GoStudios] GoCloud Gaming installed." }
 
 # Make sure Play Store is present (playstore system image)
 $play = & $ADB shell pm path com.android.vending 2>$null
