@@ -55,6 +55,6 @@ Write-Host "[5/6] zipalign done"
 if (-not (Test-Path $KS)) {
     & keytool -genkeypair -v -keystore $KS -alias cloud -keyalg RSA -keysize 2048 -validity 10000 -storepass gostudios -keypass gostudios -dname "CN=GoStudios, OU=Cloud, O=GoStudios, C=US" 2>&1 | Out-Null
 }
-& (Join-Path $BT "apksigner.bat") sign --ks $KS --ks-key-alias cloud --ks-pass pass:gostudios --key-pass pass:gostudios --out (Join-Path $USBROOT "cloudgaming\cloudgaming.apk") (Join-Path $BUILD "app-aligned.apk") 2>&1 | Out-Null
+& (Join-Path $BT "apksigner.bat") sign --ks $KS --ks-key-alias cloud --ks-pass pass:gostudios --key-pass pass:gostudios --v1-signing-enabled true --v2-signing-enabled true --out (Join-Path $USBROOT "cloudgaming\cloudgaming.apk") (Join-Path $BUILD "app-aligned.apk") 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) { throw "apksigner failed" }
 Write-Host "[6/6] signed: cloudgaming\cloudgaming.apk"
