@@ -67,7 +67,7 @@ public class GoUIActivity extends Activity {
     private int spotIndex = 0;
     private String currentTab = "home";
     private boolean splashDone = false;
-    private View homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn, aboutTabBtn;
+    private View homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn, aboutTabBtn, cloudTabBtn;
 
     static class AppEntry {
         final String label; final String pkg; final Drawable icon;
@@ -199,9 +199,11 @@ public class GoUIActivity extends Activity {
         acctTabBtn = tabButton("Account");
         settingsTabBtn = tabButton("Settings");
         aboutTabBtn = tabButton("About");
+        cloudTabBtn = tabButton("Cloud");
         tabs.addView(homeTabBtn); tabs.addView(gamesTabBtn);
         tabs.addView(playTabBtn); tabs.addView(acctTabBtn);
         tabs.addView(settingsTabBtn); tabs.addView(aboutTabBtn);
+        tabs.addView(cloudTabBtn);
         page.addView(tabs);
 
         tabTitle = txt("", 15f, Color.parseColor("#B2EBF2"));
@@ -233,12 +235,13 @@ public class GoUIActivity extends Activity {
             name.equals("Gaming Hub") ? "games" :
             name.equals("Play Store") ? "play" :
             name.equals("Account") ? "acct" :
-            name.equals("Settings") ? "settings" : "about"));
+            name.equals("Settings") ? "settings" :
+            name.equals("About") ? "about" : "cloud"));
         return b;
     }
 
     private void markTab(View active) {
-        View[] all = { homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn, aboutTabBtn };
+        View[] all = { homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn, aboutTabBtn, cloudTabBtn };
         for (View v : all) {
             TextView tv = (TextView) v;
             boolean on = (v == active);
@@ -254,7 +257,7 @@ public class GoUIActivity extends Activity {
         else if (tab.equals("games")) { markTab(gamesTabBtn); showGamingHub(); }
         else if (tab.equals("play")) { markTab(playTabBtn); showPlayStore(); }
         else if (tab.equals("acct")) { markTab(acctTabBtn); showAccount(); }
-        else { markTab(aboutTabBtn); showAbout(); }
+        else { markTab(cloudTabBtn); showCloud(); }
     }
 
     /* ---------------- Home: multiple Spots ---------------- */
@@ -435,6 +438,50 @@ public class GoUIActivity extends Activity {
             try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick"))); } catch (Exception ignored) { }
         });
         body.addView(gh);
+    }
+
+    private void showCloud() {
+        tabTitle.setText("Cloud Gaming");
+        body.addView(txt("\u2601\ufe0f  Cloud Gaming", 24f, Color.WHITE));
+        body.addView(txt("Play anywhere, no install needed", 13f, Color.parseColor("#80CBC4")));
+        body.addView(spacer(16));
+        GridLayout g = new GridLayout(this);
+        g.setColumnCount(2);
+        g.addView(cloudTile("Xbox Cloud Gaming", "https://play.xbox.com/", "#107C10"));
+        g.addView(cloudTile("GeForce NOW", "https://play.geforcenow.com/", "#76B900"));
+        g.addView(cloudTile("Steam Link", "https://store.steampowered.com/remoteplay", "#1B2838"));
+        g.addView(cloudTile("Amazon Luna", "https://luna.amazon.com/", "#00A8E1"));
+        g.addView(cloudTile("Boosteroid", "https://boosteroid.com/", "#FF6B00"));
+        g.addView(cloudTile("PlayTree", "https://playtree-play.base44.app/", "#7E57C2"));
+        body.addView(g);
+    }
+
+    private View cloudTile(String label, final String url, String color) {
+        LinearLayout t = new LinearLayout(this);
+        t.setOrientation(LinearLayout.VERTICAL);
+        t.setGravity(Gravity.CENTER);
+        t.setPadding(20, 20, 20, 20);
+        GradientDrawable bg = new GradientDrawable();
+        bg.setColor(Color.parseColor(color));
+        bg.setCornerRadius(24f);
+        t.setBackground(bg);
+        TextView ic = txt("\u2601", 32f, Color.WHITE);
+        ic.setGravity(Gravity.CENTER);
+        t.addView(ic);
+        TextView n = txt(label, 12f, Color.WHITE);
+        n.setGravity(Gravity.CENTER);
+        n.setMaxLines(2);
+        n.setPadding(0, 8, 0, 0);
+        t.addView(n);
+        t.setOnClickListener(v -> {
+            try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url))); } catch (Exception ignored) { }
+        });
+        GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
+        lp.width = 0;
+        lp.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        lp.setMargins(8, 8, 8, 8);
+        t.setLayoutParams(lp);
+        return t;
     }
 
     private void showSettings() {
