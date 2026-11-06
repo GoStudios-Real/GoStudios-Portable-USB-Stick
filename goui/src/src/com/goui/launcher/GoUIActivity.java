@@ -67,7 +67,7 @@ public class GoUIActivity extends Activity {
     private int spotIndex = 0;
     private String currentTab = "home";
     private boolean splashDone = false;
-    private View homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn;
+    private View homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn, aboutTabBtn;
 
     static class AppEntry {
         final String label; final String pkg; final Drawable icon;
@@ -198,9 +198,10 @@ public class GoUIActivity extends Activity {
         playTabBtn = tabButton("Play Store");
         acctTabBtn = tabButton("Account");
         settingsTabBtn = tabButton("Settings");
+        aboutTabBtn = tabButton("About");
         tabs.addView(homeTabBtn); tabs.addView(gamesTabBtn);
         tabs.addView(playTabBtn); tabs.addView(acctTabBtn);
-        tabs.addView(settingsTabBtn);
+        tabs.addView(settingsTabBtn); tabs.addView(aboutTabBtn);
         page.addView(tabs);
 
         tabTitle = txt("", 15f, Color.parseColor("#B2EBF2"));
@@ -231,12 +232,13 @@ public class GoUIActivity extends Activity {
             name.equals("Home") ? "home" :
             name.equals("Gaming Hub") ? "games" :
             name.equals("Play Store") ? "play" :
-            name.equals("Account") ? "acct" : "settings"));
+            name.equals("Account") ? "acct" :
+            name.equals("Settings") ? "settings" : "about"));
         return b;
     }
 
     private void markTab(View active) {
-        View[] all = { homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn };
+        View[] all = { homeTabBtn, gamesTabBtn, playTabBtn, acctTabBtn, settingsTabBtn, aboutTabBtn };
         for (View v : all) {
             TextView tv = (TextView) v;
             boolean on = (v == active);
@@ -252,7 +254,7 @@ public class GoUIActivity extends Activity {
         else if (tab.equals("games")) { markTab(gamesTabBtn); showGamingHub(); }
         else if (tab.equals("play")) { markTab(playTabBtn); showPlayStore(); }
         else if (tab.equals("acct")) { markTab(acctTabBtn); showAccount(); }
-        else { markTab(settingsTabBtn); showSettings(); }
+        else { markTab(aboutTabBtn); showAbout(); }
     }
 
     /* ---------------- Home: multiple Spots ---------------- */
@@ -415,6 +417,24 @@ public class GoUIActivity extends Activity {
             showAccountGate();
         });
         body.addView(out);
+    }
+
+    private void showAbout() {
+        tabTitle.setText("About");
+        body.addView(txt("GoStudios Portable USB Stick", 24f, Color.WHITE));
+        body.addView(txt("GoUI 4.9  \u2022  Android 16", 14f, Color.parseColor("#80CBC4")));
+        body.addView(spacer(16));
+        body.addView(kv("Tagline", "Your Android. Your USB. Any PC."));
+        body.addView(kv("Version", "GoUI 4.9"));
+        body.addView(kv("OS", "Android " + Build.VERSION.RELEASE));
+        body.addView(kv("Trademark", "GoStudios, GoUI, GoDevice, PlayTree"));
+        body.addView(kv("Copyright", "\u00a9 2026 GoStudios"));
+        body.addView(spacer(24));
+        TextView gh = btn("Open GitHub");
+        gh.setOnClickListener(v -> {
+            try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick"))); } catch (Exception ignored) { }
+        });
+        body.addView(gh);
     }
 
     private void showSettings() {
