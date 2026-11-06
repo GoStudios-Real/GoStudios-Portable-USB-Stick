@@ -1,0 +1,29 @@
+Subject: Introducing GoStudios Portable USB Stick — Your Android, Your USB, Any PC
+
+Hi there,
+
+We're excited to announce the GoStudios Portable USB Stick — a portable Android 16 environment that runs from a USB drive on any Windows PC.
+
+No reboot. No install. Just plug in and go.
+
+What's included:
+- Android 16 with Google Play Store
+- GoUI 4.9 — our custom system UI / home launcher
+- GoStudios Account system
+- GoStudios Gaming Hub (Xbox Cloud Gaming, PlayTree, GeForce NOW, Steam Link, YouTube, Discord)
+- Auto-open on plug-in, auto-close on unplug
+- Fullscreen mode with auto-return to desktop
+- USB Maker GUI to create new sticks
+
+Get it:
+- GitHub: https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick
+- Live demo: https://gostudios-real.github.io/GoStudios-Portable-USB-Stick/
+- itch.io: (coming soon)
+
+Tagline: Your Android. Your USB. Any PC.
+
+Trademark: GoStudios, GoUI, GoDevice, PlayTree are trademarks of GoStudios.
+Copyright (c) 2026 GoStudios. All rights reserved.
+
+Best regards,
+GoStudios Team
