@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.goui.launcher"
+    android:versionCode="49"
+    android:versionName="4.9">
+
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="36" />
+
+    <application
+        android:label="GoUI 4.9"
+        android:icon="@drawable/icon"
+        android:hardwareAccelerated="true"
+        android:allowBackup="true">
+
+        <activity
+            android:name=".GoUIActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/GoUI.Fullscreen"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

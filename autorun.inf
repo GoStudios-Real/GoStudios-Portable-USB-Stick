@@ -1,0 +1,5 @@
+[autorun]
+label=GoStudios Portable USB Stick
+icon=goui\goui.ico
+shell\open=Open GoStudios
+shell\open\command=launch.bat

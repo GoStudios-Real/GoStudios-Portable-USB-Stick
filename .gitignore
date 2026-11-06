@@ -1,0 +1,14 @@
+# Generated AVD data (regenerate with create-avd.ps1)
+avd/
+# Build artifacts
+goui/build/
+goui/src/build/
+goui/*.apk
+*.keystore
+*.idsig
+# OS files
+Thumbs.db
+.DS_Store
+# Temp
+*.tmp
+tmpAdbCmds/

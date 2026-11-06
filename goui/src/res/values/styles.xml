@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GoUI.Fullscreen" parent="android:Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/boot</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <color name="goui_primary">#009688</color>
+    <color name="goui_dark">#080C28</color>
+    <color name="goui_accent">#4A148C</color>
+    <color name="goui_text">#FFFFFF</color>
+</resources>
