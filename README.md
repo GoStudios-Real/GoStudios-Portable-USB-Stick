@@ -52,3 +52,10 @@ Licensed under the MIT License (see `LICENSE`).
 ## Links
 - GitHub: https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick
 - itch.io: (publish via butler)
+
+---
+
+## OpenCode
+
+This repository is maintained with [OpenCode](https://opencode.ai).
+Hub: https://gostudios-real.github.io/
