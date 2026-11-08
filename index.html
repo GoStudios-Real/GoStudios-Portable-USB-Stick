@@ -1,103 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoStudios Portable USB Stick — Play in Browser</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', sans-serif; background: #080C28; color: #fff; overflow: hidden; height: 100vh; }
-.phone { width: 360px; height: 640px; margin: 20px auto; background: linear-gradient(180deg, #080C28, #3C145A); border-radius: 24px; box-shadow: 0 0 40px #7E57C2; overflow: hidden; position: relative; }
-.screen { padding: 20px; height: 100%; overflow-y: auto; }
-.hero { text-align: center; padding: 40px 20px; }
-.hero h1 { font-size: 2.4em; }
-.hero p { opacity: 0.8; margin-top: 8px; }
-.btn { display: inline-block; background: #00897B; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 5px; border: none; cursor: pointer; font-size: 1em; }
-.tabbar { display: flex; background: #1C2331; border-radius: 12px; margin: 10px 0; overflow: hidden; }
-.tab { flex: 1; padding: 10px; text-align: center; cursor: pointer; color: #9E9E9E; font-size: 0.85em; }
-.tab.active { background: #263238; color: #fff; }
-.card { background: #1C2331; padding: 16px; border-radius: 12px; margin: 8px 0; }
-.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.tile { background: #1C2331; padding: 12px; border-radius: 12px; text-align: center; cursor: pointer; }
-.tile .icon { font-size: 2em; }
-.tile .name { font-size: 0.7em; margin-top: 4px; }
-.hidden { display: none; }
-.splash { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: #080C28; }
-.account { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px; }
-.account input { padding: 10px; border-radius: 8px; border: none; width: 260px; background: #1C2331; color: #fff; }
-.footer { text-align: center; padding: 20px; opacity: 0.6; font-size: 0.85em; }
-@media (max-width: 420px) { .phone { width: 100%; height: 100vh; margin: 0; border-radius: 0; } }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GoStudios Portable USB Stick</title>
+<meta name="description" content="Android 16 on a USB stick for any Windows PC. GoUI 4.9, Play Store, Gaming Hub, auto-open on plug-in.">
+<meta name="theme-color" content="#05070d">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2305070d'/><path d='M50 18l6 18 18 6-18 6-6 18-6-18-18-6 18-6z' fill='%2300c9db'/><circle cx='82' cy='24' r='6' fill='%237ed321'/><circle cx='18' cy='76' r='6' fill='%237ed321'/></svg>">
+<style>
+:root{--bg:#05070d;--panel:rgba(13,21,35,.82);--line:rgba(125,168,205,.18);--text:#e9f4ff;--muted:#8ea5bd;--cyan:#00c9db;--lime:#7ed321;--radius:16px;--max:1100px}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.wrap{width:min(var(--max),calc(100%-40px));margin-inline:auto}
+header{position:sticky;top:0;background:rgba(5,7,13,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--text);text-decoration:none}
+.brand-mark{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(0,201,219,.18),rgba(0,102,255,.06));border:1px solid rgba(0,201,219,.35);color:var(--cyan)}
+.brand-mark svg{width:20px;height:20px}
+nav a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;margin-left:14px}
+nav a:hover{color:var(--text)}
+.hero{padding:70px 0 40px;background:radial-gradient(900px 400px at 80% 10%,rgba(0,201,219,.12),transparent 60%)}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.05;margin:10px 0 14px}
+.lede{color:var(--muted);max-width:760px;font-size:17px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;border:1px solid transparent;font-weight:750;font-size:14px;text-decoration:none;margin:6px 6px 0 0}
+.btn-primary{background:var(--cyan);color:#001117}
+.btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+.section{padding:48px 0}
+.section h2{font-size:26px;margin-bottom:10px}
+.muted{color:var(--muted)}
+.list{margin:14px 0 0;padding:0;list-style:none}
+.list li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px}
+.list li b{color:var(--text)}
+.links a{display:inline-block;margin:4px 8px 4px 0;color:var(--cyan);text-decoration:none;font-weight:600}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px}
+</style>
 </head>
 <body>
-<div class="phone">
-  <div class="screen" id="splash" class="splash">
-    <div style="text-align:center;">
-      <div style="font-size:3em;">&#128241;</div>
-      <h1>GoStudios</h1>
-      <p>GoStudios Portable USB Stick</p>
-      <p style="color:#7E57C2; margin-top:20px;">GoUI 4.9 &bull; Android 16</p>
-    </div>
-  </div>
-  <div class="screen hidden" id="account">
-    <div class="account">
-      <h2>GoStudios Account</h2>
-      <input id="user" placeholder="Username">
-      <input id="pass" type="password" placeholder="Password">
-      <button class="btn" onclick="signIn()">Sign In</button>
-      <button class="btn" onclick="create()">Create Account</button>
-      <p id="msg" style="color:#EF9A9A;"></p>
-    </div>
-  </div>
-  <div class="screen hidden" id="shell">
-    <h2>GoUI 4.9 <span style="color:#80CBC4; font-size:0.6em;">&#128100; <span id="chip"></span></span></h2>
-    <div class="tabbar">
-      <div class="tab active" onclick="tab('home')">Home</div>
-      <div class="tab" onclick="tab('games')">Gaming Hub</div>
-      <div class="tab" onclick="tab('play')">Play Store</div>
-      <div class="tab" onclick="tab('about')">About</div>
-    </div>
-    <div id="home">
-      <p style="color:#80CBC4; font-size:0.9em;">Home &bull; Spot 1 of 2</p>
-      <div class="grid" id="spotgrid"></div>
-    </div>
-    <div id="games" class="hidden">
-      <p style="color:#80CBC4;">GoStudios Gaming Hub</p>
-      <h3 style="color:#7E57C2; margin-top:10px;">Web Apps</h3>
-      <div class="grid">
-        <div class="tile" onclick="openUrl('https://play.xbox.com/')"><div class="icon">&#127918;</div><div class="name">Xbox Cloud</div></div>
-        <div class="tile" onclick="openUrl('https://playtree-play.base44.app/')"><div class="icon">&#127795;</div><div class="name">PlayTree</div></div>
-        <div class="tile" onclick="openUrl('https://play.geforcenow.com/')"><div class="icon">&#9889;</div><div class="name">GeForce NOW</div></div>
-        <div class="tile" onclick="openUrl('https://www.youtube.com/')"><div class="icon">&#9654;</div><div class="name">YouTube</div></div>
-      </div>
-    </div>
-    <div id="play" class="hidden">
-      <div style="text-align:center; padding:40px;">
-        <div style="font-size:4em;">&#128722;</div>
-        <h3>Google Play Store</h3>
-        <p style="color:#80CBC4;">Apps, games &amp; GoStudios content</p>
-        <button class="btn" onclick="openUrl('https://play.google.com/')">Open Play Store</button>
-      </div>
-    </div>
-    <div id="about" class="hidden">
-      <div class="card"><b>GoStudios Portable USB Stick</b><br>GoUI 4.9 &bull; Android 16<br><br><b>Tagline:</b> Your Android. Your USB. Any PC.<br><b>Copyright:</b> &copy; 2026 GoStudios</div>
-      <a class="btn" href="https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick">GitHub</a>
-    </div>
-  </div>
-</div>
-<div class="footer">Play in browser demo of GoUI 4.9 &mdash; <a href="https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick" style="color:#80CBC4;">Get the real USB stick</a></div>
-<script>
-const apps = ["GoDevice","PlayTree","Xbox Cloud","Files","Settings","Camera","Maps","Chrome","YouTube","Discord","Spotify","Calendar","Gmail","Photos","Clock","Calculator"];
-let user = localStorage.getItem("goui_user");
-function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
-setTimeout(()=>{ if(user){ showShell(); } else { show('account'); } }, 2000);
-function signIn(){ const u=document.getElementById('user').value, p=document.getElementById('pass').value; if(!u||!p){document.getElementById('msg').textContent='Enter username and password.';return;} user=u; localStorage.setItem('goui_user',u); showShell(); }
-function create(){ const u=document.getElementById('user').value, p=document.getElementById('pass').value; if(!u||!p){document.getElementById('msg').textContent='Choose a username and password.';return;} user=u; localStorage.setItem('goui_user',u); showShell(); }
-function showShell(){ document.getElementById('chip').textContent=user; show('shell'); renderSpot(); }
-function tab(t){ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); event.target.classList.add('active'); ['home','games','play','about'].forEach(x=>document.getElementById(x).classList.add('hidden')); document.getElementById(t).classList.remove('hidden'); }
-function renderSpot(){ const g=document.getElementById('spotgrid'); g.innerHTML=''; apps.slice(0,12).forEach(a=>{ const d=document.createElement('div'); d.className='tile'; d.innerHTML='<div class="icon">&#128241;</div><div class="name">'+a+'</div>'; g.appendChild(d); }); }
-function openUrl(u){ window.open(u,'_blank'); }
-</script>
+<header><div class="wrap header-inner">
+  <a class="brand" href="https://gostudios-real.github.io/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 5.8L20 10l-6.1 2.2L12 18l-1.9-5.8L4 10l6.1-2.2z" fill="currentColor"/></svg></span><span>Portable USB Stick</span></a>
+  <nav><a href="#features">Features</a><a href="#links">Links</a><a href="https://gostudios-real.github.io/">GoStudios hub</a></nav>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Tool / Portable Android</p>
+  <h1>Android in your pocket. On any PC.</h1>
+  <p class="lede">A non-bootable Android 16 USB stick that runs an emulator on Windows. Plug in and GoUI 4.9 opens; unplug and it closes.</p>
+  <div><a class="btn btn-primary" href="https://gostudios-real.github.io/GoStudios-Portable-USB-Stick/">Live page</a><a class="btn btn-ghost" href="https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick">Source</a></div>
+</div></section>
+<section class="section" id="features"><div class="wrap">
+  <h2>Features</h2>
+  <p class="muted">Includes Play Store, a GoStudios account gate, Gaming Hub and cloud gaming shortcuts.</p>
+  <ul class="list"><li><b>Android 16 on a USB stick</b></li><li><b>GoUI 4.9 interface</b></li><li><b>Auto-open on plug-in, auto-close on unplug</b></li><li><b>Play Store and Gaming Hub</b></li><li><b>Shortcuts: Xbox Cloud Gaming, PlayTree, GeForce NOW, Steam Link, YouTube, Discord</b></li><li><b>Works on any Windows PC</b></li></ul>
+</div></section>
+<section class="section" id="links"><div class="wrap">
+  <h2>Links</h2>
+  <div class="links"><a href="https://gostudios-real.github.io/GoStudios-Portable-USB-Stick/">Live page</a><a href="https://github.com/GoStudios-Real/GoStudios-Portable-USB-Stick">Repository</a><a href="https://gostudios-real.github.io/">GoStudios hub</a></div>
+</div></section>
+</main>
+<footer><div class="wrap">OpenCode-maintained page for Portable USB Stick. Part of the GoStudios-Real ecosystem. &copy; GoStudios.</div></footer>
 </body>
 </html>
